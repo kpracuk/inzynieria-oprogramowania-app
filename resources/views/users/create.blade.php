@@ -48,6 +48,8 @@
                 </div>
 
                 <div class="px-2 w-full md:w-1/2">
+                    <x-label for="team_id" :value="__('Zespół')" />
+                    <x-select :items="$teams" id="team_id" class="block mt-1 w-full" type="text" name="team_id" :value="old('team_id')" required />
                 </div>
 
                 <div class="px-2 w-full md:w-1/2">

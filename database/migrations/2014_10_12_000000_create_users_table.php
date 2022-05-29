@@ -26,10 +26,13 @@ return new class extends Migration
             $table->timestamp('hired_at');
             $table->integer('salary');
             $table->integer('available_time_off');
+            $table->foreignId('team_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 

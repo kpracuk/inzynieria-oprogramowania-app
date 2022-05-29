@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TeamsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::redirect('/', '/dashboard');
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::resource('users', UsersController::class, [
+        'only' => ['create', 'store', 'show']
+    ]);
+    Route::resource('teams', TeamsController::class, [
         'only' => ['create', 'store', 'show']
     ]);
 });

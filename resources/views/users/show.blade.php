@@ -15,6 +15,7 @@
                 <span class="text-md font-black text-gray-500">{{ $user->position }}</span>
             </div>
         </div>
+        <a href="{{ route('teams.show', ['team' => $user->team->id]) }}" class="text-lg font-black text-gray-500">{{ $user->team->name }}</a>
         <div class="flex flex-col text-gray-800 mt-2">
             <h2 class="text-sm font-black text-gray-500">KONTAKT SŁUŻBOWY</h2>
             <span class="font-bold text-gray-800">{{ $user->email }}</span>

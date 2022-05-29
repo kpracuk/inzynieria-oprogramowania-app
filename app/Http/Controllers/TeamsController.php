@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\CreateTeamRequest;
 use App\Models\Team;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 
-class UsersController extends Controller
+class TeamsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -25,46 +22,43 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function create(): Response
+    public function create()
     {
-        $teams = Team::all();
-        return response()->view('users.create', ['teams' => $teams]);
+        return response()->view('teams.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateUserRequest  $request
+     * @param  CreateTeamRequest $request
      * @return RedirectResponse
      */
-    public function store(CreateUserRequest $request): RedirectResponse
+    public function store(CreateTeamRequest $request)
     {
         $payload = $request->validated();
-        $payload['password'] = Str::random(8);
+        $team = Team::create($payload);
 
-        $user = User::create($payload);
-
-        return response()->redirectToRoute('users.show', ['user' => $user->id]);
+        return response()->redirectToRoute('teams.show', ['team' => $team->id]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param User $user
-     * @return Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(User $user): Response
+    public function show(Team $team)
     {
-        return response()->view('users.show', ['user' => $user]);
+        return response()->view('teams.show', ['team' => $team]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -76,7 +70,7 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
@@ -87,7 +81,7 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

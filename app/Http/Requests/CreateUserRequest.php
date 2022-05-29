@@ -35,7 +35,8 @@ class CreateUserRequest extends FormRequest
             'position' => ['required', 'max:255'],
             'hired_at' => ['required', 'date'],
             'salary' => ['required', 'numeric'],
-            'available_time_off' => ['required', 'numeric']
+            'available_time_off' => ['required', 'numeric'],
+            'team_id' => ['required', 'exists:teams,id']
         ];
     }
 }
