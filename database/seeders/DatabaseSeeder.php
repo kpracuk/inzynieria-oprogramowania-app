@@ -26,5 +26,12 @@ class DatabaseSeeder extends Seeder
              'email' => 'user@example.com',
              'team_id' => 1
          ]);
+
+        User::factory()->create([
+            'firstname' => 'Test',
+            'lastname' => 'Admin',
+            'email' => 'admin@example.com',
+            'is_admin' => true
+        ]);
     }
 }

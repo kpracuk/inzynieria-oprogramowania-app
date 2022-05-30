@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('private_phone');
             $table->string('address');
             $table->string('position');
+            $table->boolean('is_admin')->default(false);
             $table->timestamp('hired_at');
             $table->integer('salary');
             $table->integer('available_time_off');

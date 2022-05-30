@@ -15,36 +15,40 @@
                 <span class="text-md font-black text-gray-500">{{ $user->position }}</span>
             </div>
         </div>
-        <a href="{{ route('teams.show', ['team' => $user->team->id]) }}" class="text-lg font-black text-gray-500">{{ $user->team->name }}</a>
+        @if($user->team)
+            <a href="{{ route('teams.show', ['team' => $user->team->id]) }}" class="text-lg font-black text-gray-500">{{ $user->team->name }}</a>
+        @endif
         <div class="flex flex-col text-gray-800 mt-2">
             <h2 class="text-sm font-black text-gray-500">KONTAKT SŁUŻBOWY</h2>
             <span class="font-bold text-gray-800">{{ $user->email }}</span>
             <span class="font-bold text-gray-800">{{ $user->phone }}</span>
         </div>
-        <div class="flex flex-col text-gray-800 mt-2">
-            <h2 class="text-sm font-black text-gray-500">DANE PRYWATNE</h2>
-            <span class="font-bold text-gray-800">{{ $user->private_email }}</span>
-            <span class="font-bold text-gray-800">{{ $user->private_phone }}</span>
-            <span class="font-bold text-gray-800">{{ $user->address }}</span>
-        </div>
-        <div class="flex flex-col text-gray-800 mt-2">
-            <h2 class="text-sm font-black text-gray-500">DANE ADMINISTRACYJNE</h2>
-            <div>
-                <span class="font-semibold text-gray-800">Data zatrudnienia:</span>
-                <span class="font-black text-gray-800">{{ $user->hired_at }}</span>
+        @if(Auth::user()->is_admin || $user->id === Auth::id())
+            <div class="flex flex-col text-gray-800 mt-2">
+                <h2 class="text-sm font-black text-gray-500">DANE PRYWATNE</h2>
+                <span class="font-bold text-gray-800">{{ $user->private_email }}</span>
+                <span class="font-bold text-gray-800">{{ $user->private_phone }}</span>
+                <span class="font-bold text-gray-800">{{ $user->address }}</span>
             </div>
-            <div>
-                <span class="font-semibold text-gray-800">Wynagrodzenie:</span>
-                <span class="font-black text-gray-800">{{ $user->salary }} PLN</span>
+            <div class="flex flex-col text-gray-800 mt-2">
+                <h2 class="text-sm font-black text-gray-500">DANE ADMINISTRACYJNE</h2>
+                <div>
+                    <span class="font-semibold text-gray-800">Data zatrudnienia:</span>
+                    <span class="font-black text-gray-800">{{ $user->hired_at }}</span>
+                </div>
+                <div>
+                    <span class="font-semibold text-gray-800">Wynagrodzenie:</span>
+                    <span class="font-black text-gray-800">{{ $user->salary }} PLN</span>
+                </div>
+                <div>
+                    <span class="font-semibold text-gray-800">Dostępny urlop:</span>
+                    @if($user->available_time_off === 1)
+                        <span class="font-black text-gray-800">{{ $user->available_time_off }} dzień</span>
+                    @else
+                        <span class="font-black text-gray-800">{{ $user->available_time_off }} dni</span>
+                    @endif
+                </div>
             </div>
-            <div>
-                <span class="font-semibold text-gray-800">Dostępny urlop:</span>
-                @if($user->available_time_off === 1)
-                    <span class="font-black text-gray-800">{{ $user->available_time_off }} dzień</span>
-                @else
-                    <span class="font-black text-gray-800">{{ $user->available_time_off }} dni</span>
-                @endif
-            </div>
-        </div>
+        @endif
     </x-card>
 </x-app-layout>
