@@ -4,6 +4,9 @@
     $size_class = 'sm:max-w-md';
 
     switch ($size) {
+        case 'xlarge':
+            $size_class = 'sm:max-w-7xl px-4 sm:px-6 lg:px-8 ';
+            break;
         case 'large':
             $size_class = 'sm:max-w-5xl px-4 sm:px-6 lg:px-8 ';
             break;
