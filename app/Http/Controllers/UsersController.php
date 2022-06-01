@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UsersController extends Controller
@@ -37,9 +38,11 @@ class UsersController extends Controller
     public function store(CreateUserRequest $request): RedirectResponse
     {
         $payload = $request->validated();
-        $payload['password'] = Str::random(8);
+        $tempPassword = Str::random(8);
 
-        $user = User::create($payload);
+        $user = User::create([...$payload, 'password' => Hash::make($tempPassword)]);
+
+        $request->session()->flash('password', $tempPassword);
 
         return response()->redirectToRoute('users.show', ['user' => $user->id]);
     }

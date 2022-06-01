@@ -5,6 +5,12 @@
         </h2>
     </x-slot>
 
+    @if(session()->has('password'))
+        <div class="bg-green-700 text-white p-4 shadow-lg absolute bottom-0 w-full">
+            Pomyślnie utworzono użytkownika! Jego tymczasowe hasło to: <span class="font-bold">{{ session()->get('password') }}</span>
+        </div>
+    @endif
+
     <x-card>
         <div class="flex text-gray-800 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
