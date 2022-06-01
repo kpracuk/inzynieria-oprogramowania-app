@@ -6,18 +6,25 @@
     </x-slot>
 
     <x-card>
-        <div class="flex text-gray-800 items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <div class="flex flex-col pl-4">
-                <h1 class="text-2xl font-semibold">{{ $team->name }}</h1>
-                @if(count($team->users) === 1)
-                    <span class="text-md font-black text-gray-500">{{ count($team->users) }} członek</span>
-                @else
-                    <span class="text-md font-black text-gray-500">{{ count($team->users) }} członków</span>
-                @endif
+        <div class="flex text-gray-800 items-center justify-between">
+            <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <div class="flex flex-col pl-4">
+                    <h1 class="text-2xl font-semibold">{{ $team->name }}</h1>
+                    @if(count($team->users) === 1)
+                        <span class="text-md font-black text-gray-500">{{ count($team->users) }} członek</span>
+                    @else
+                        <span class="text-md font-black text-gray-500">{{ count($team->users) }} członków</span>
+                    @endif
+                </div>
             </div>
+            <a href="{{ route('messages') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                </svg>
+            </a>
         </div>
         @if(count($team->users))
             <div class="flex flex-col text-gray-800 mt-2">

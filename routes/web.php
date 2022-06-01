@@ -20,6 +20,7 @@ Route::redirect('/', '/dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::view('/messages', 'messages')->name('messages');
     Route::resource('users', UsersController::class, [
         'only' => ['create', 'store', 'show']
     ]);
